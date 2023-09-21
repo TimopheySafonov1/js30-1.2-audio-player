@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="asserts/css/reset.css">
+    <link rel="stylesheet" href="asserts/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <title>Music player</title>
+</head>
+<body>
+    <div class="root">
+        <h1>Audio Player</h1>
+        <main class="app">
+            <div class="content">
+                <div class="handling">
+                    <div class="handling-sound" title="Volume">
+                        <svg class="icon-sound">
+                            <use xlink:href="asserts/images/sprite.svg#sound"></use>
+                        </svg>
+                        <div class="volume">
+                            <input
+                                min="0"
+                                max="1"
+                                step="0.1"
+                                volume="0.5"
+                                type="range"
+                                name="volume"
+                                class="controls-volume"
+                            />
+                        </div>
+                    </div>
+                    <div class="handling-repeat" title="Repeat">
+                        <svg class="icon-repeat">
+                            <use xlink:href="asserts/images/sprite.svg#repeat"></use>
+                        </svg>
+                    </div>
+                    <div class="handling-shuffle" title="Shuffle">
+                        <svg class="icon-shuffle">
+                            <use xlink:href="asserts/images/sprite.svg#shuffle"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="current">
+                    <div class="current-image"
+                    style="background-image: url(asserts/images/image1.jpg);"></div>
+                    <div class="current-info">
+                        <div class="current-info__top">
+                            <div class="current-info__titles">
+                                <h2 class="current-info__group">Ketty Perry</h2>
+                                <h3 class="current-info__track">Dark Horse</h3>
+                            </div>
+                            <div class="current-info__year">2005</div>
+                        </div>
+                        <div class="controls">
+                            <div class="controls-buttons">
+                                <button class="controls-button contols-prev">
+                                    <svg class="icon-arrow">
+                                        <use xlink:href="asserts/images/sprite.svg#arrow"></use>
+                                    </svg>
+                                </button>
+                                <button class="controls-button contols-play">
+                                    <svg class="icon-pause">
+                                        <use xlink:href="asserts/images/sprite.svg#pause"></use>
+                                    </svg>
+                                    <svg class="icon-play">
+                                        <use xlink:href="asserts/images/sprite.svg#play"></use>
+                                    </svg>
+                                </button>
+                                <button class="controls-button controls-next">
+                                    <svg class="icon-arrow">
+                                        <use xlink:href="asserts/images/sprite.svg#arrow"></use>
+                                    </svg>
+                                </button>
+                            </div>
+                            <div class="controls-progress">
+                                <div class="progress">
+                                    <div class="progress-current" style="width: 20%;"></div>
+                                </div>
+                                <div class="timeline">
+                                    <span class="time-start">00:32</span>
+                                    <span class="time-end">02:32</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="list">
+                    <p class="list-title">Tracks</p>
+                    <div class="items">
+                        <div class="item">
+                            <div class="item-image"
+                            style="background-image: url(asserts/images/image1.jpg);"></div>
+                            <div class="item-titles">
+                                <h2 class="item-group">Ketty perry</h2>
+                                <h3 class="item-track">Black horse</h3>
+                            </div>
+                            <p class="item-duration">
+                                04:07
+                            </p>
+                            <p class="item-genre">
+                                Pop
+                            </p>
+                            <button class="item-play">
+                                <svg class="icon-play">
+                                    <use xlink:href="asserts/images/sprite.svg#play"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+    
+</body>
+</html>
