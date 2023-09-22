@@ -54,8 +54,10 @@ const AudioControl = {
     },
 
     handleAudioPlay(){
+        console.log("clicked");
         const { playing, current} =this.state;
         const { audio } = current;
+        console.log(playing);
         !playing ? audio.play() : audio.pause();
         this.state.playing = !playing;
         this.playButton.classList.toggle("playing", !playing);
@@ -83,7 +85,7 @@ const AudioControl = {
         // console.log("First Item ID:", first);
         if (!itemId) return;
         this.setCurrentItem(itemId);
-    }, 
+    },
 
     handelPlayer(){
         const play = document.querySelector('.controls-play');
@@ -98,7 +100,13 @@ const AudioControl = {
     audioUpdateHandler({ audio, duration }){
         const progress = document.querySelector('.progress-current');
         const timeLIne = document.querySelector('.time-start');
-        audio.play();
+
+        // audio.addEventListener('canplaythrough', () => {
+        //     if (!this.state.playing) {
+        //         this.handleAudioPlay();
+        //     }
+        // });
+
         audio.addEventListener('timeupdate', ({target}) => {
             const {currentTime} = target;
             const width  = currentTime * 100/ duration;
@@ -111,7 +119,7 @@ const AudioControl = {
             target.currentTime = 0;
             progress.style.width = '0%';
             this.state.repeating? target.play() : this.handleNext();
-        })  
+        })
 
     },
 
@@ -150,7 +158,7 @@ const AudioControl = {
                 </div>
                 <div class="controls-progress">
                     <div class="progress">
-                        <div class="progress-current"></div>
+                        <input type="range" class="progress-current" min="0" max="100" step="0.01" value="0"  />
                     </div>
                     <div class="timeline">
                         <span class="time-start">00:00</span>
@@ -172,8 +180,8 @@ const AudioControl = {
     togglePlaying(){
         const { playing, current } =this.state;
         const { audio } = current;
-        !playing ?  audio.play() : audio.pause();
-        this.playButton.classList.toggle("playing", !playing);
+        playing ?  audio.play() : audio.pause();
+        this.playButton.classList.toggle("playing", playing);
     },
 
     setCurrentItem(itemId){
@@ -196,6 +204,7 @@ const AudioControl = {
         const {id} = target.dataset;
 
         if (!id) return;
+        console.log("checked clicked")
         this.setCurrentItem(id);
     },
 
