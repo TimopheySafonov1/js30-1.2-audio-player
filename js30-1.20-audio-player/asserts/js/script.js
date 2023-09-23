@@ -113,6 +113,9 @@ const AudioControl = {
 
             timeLIne.innerHTML = toMinAndSec(currentTime);
             progress.style.width = `${width}%`;
+            if (this.state.playing) {
+                progress.value = width; // Set the slider value to match the progress
+            }
         })
 
         audio.addEventListener('ended', ({ target }) => {
