@@ -189,7 +189,7 @@ const AudioControl = {
         this.pauseCurrentAudio();
         this.state.current = current;
         this.currentItem.innerHTML = this.rederCurrentItem(current);
-        current.audio.volume = this.state.volume;   
+        current.audio.volume = this.state.volume; 
         this.audioUpdateHandler(current);
         this.handelPlayer();
         setTimeout(() => {

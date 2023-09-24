@@ -280,9 +280,27 @@ svg {
   cursor: pointer;
 }
 
-/* .controls-volume{
-  background: #b8a9a9;
-} */
+footer {
+  padding-top: 40px;
+  max-width: 1440px;
+  display: flex;
+  gap: 60px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.github, .year-created{
+  font-size: 30px;
+  text-decoration: none;
+}
+.year-created{
+  font-weight: 10px;
+}
+
+.rs-school{
+  height: 50px;
+}
 
 .controls-volume{
   appearance: none;
