@@ -54,11 +54,12 @@ const AudioControl = {
     },
 
     handleAudioPlay(){
-        console.log("clicked");
         const { playing, current} =this.state;
         const { audio } = current;
-        console.log(playing);
+
         !playing ? audio.play() : audio.pause();
+
+
         this.state.playing = !playing;
         this.playButton.classList.toggle("playing", !playing);
     },
@@ -69,8 +70,6 @@ const AudioControl = {
         const next = currentItem.nextSibling?.dataset;
         const first  = this.audiolist.firstElementChild?.dataset
         const itemId = next?.id || first?.id;
-        console.log("First Item ID:", first);
-        console.log("Next Item ID:", next);
         if (!itemId) return;
         this.setCurrentItem(itemId);
     },
@@ -81,8 +80,6 @@ const AudioControl = {
         const prev = currentItem.previousSibling?.dataset;
         const first = this.audiolist.lastChild?.dataset;
         const itemId = prev?.id || first?.id;
-        // console.log("Preve Item ID:", prev);
-        // console.log("First Item ID:", first);
         if (!itemId) return;
         this.setCurrentItem(itemId);
     },
@@ -101,26 +98,27 @@ const AudioControl = {
         const progress = document.querySelector('.progress-current');
         const timeLIne = document.querySelector('.time-start');
 
-        // audio.addEventListener('canplaythrough', () => {
-        //     if (!this.state.playing) {
-        //         this.handleAudioPlay();
-        //     }
-        // });
+
+        progress.addEventListener('input', (event) => {
+            const newValue = event.target.value;
+            const newTime = (newValue / 100) * duration;
+            audio.currentTime = newTime;
+            timeStart.textContent = toMinAndSec(newTime);
+        });
 
         audio.addEventListener('timeupdate', ({target}) => {
+
             const {currentTime} = target;
             const width  = currentTime * 100/ duration;
 
             timeLIne.innerHTML = toMinAndSec(currentTime);
-            progress.style.width = `${width}%`;
             if (this.state.playing) {
-                progress.value = width; // Set the slider value to match the progress
+                progress.value = width;
             }
         })
 
         audio.addEventListener('ended', ({ target }) => {
             target.currentTime = 0;
-            progress.style.width = '0%';
             this.state.repeating? target.play() : this.handleNext();
         })
 
@@ -160,9 +158,7 @@ const AudioControl = {
                     </button>
                 </div>
                 <div class="controls-progress">
-                    <div class="progress">
-                        <input type="range" class="progress-current" min="0" max="100" step="0.01" value="0"  />
-                    </div>
+                    <input type="range" class="progress-current" min="0" max="100" step="0.01" value="0"  />
                     <div class="timeline">
                         <span class="time-start">00:00</span>
                         <span class="time-end">${toMinAndSec(duration)}</span>
@@ -189,7 +185,6 @@ const AudioControl = {
 
     setCurrentItem(itemId){
         const current = this.state.audios.find(({id}) => +id === +itemId)
-        console.log(current);
         if(!current) return;
         this.pauseCurrentAudio();
         this.state.current = current;
@@ -207,7 +202,6 @@ const AudioControl = {
         const {id} = target.dataset;
 
         if (!id) return;
-        console.log("checked clicked")
         this.setCurrentItem(id);
     },
 
@@ -220,8 +214,6 @@ const AudioControl = {
         }
         const formatTime = (time) => (time < 10 ? `0${time}`:time)
         const [image] = link.split('.');
-        console.log(image);
-        console.log(toMinutes(duration));
         const item = `<div class="item" data-id="${id}">
                             <div class="item-image"
                             style="background-image: url(asserts/images/${image}.jpg);"></div>
